@@ -1,12 +1,9 @@
-import vcf
+import vcfpy
 import sys
 
-# to be run in the format `python3 lowercontacts.py {filename}.vcf`
+reader = vcfpy.Reader.from_path(sys.argv[1])
+writer = vcfpy.Writer.from_path('/dev/stdout', reader.header)
 
-contacts = sys.argv[1]
-
-reader = vcf.Reader(filename=contacts)
-writer = vcf.Writer(open('./loweredcontacts.vcf', 'w'), reader)
-
+print(reader)
 for contact in reader:
     print(contact)
