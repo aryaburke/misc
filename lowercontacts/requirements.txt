@@ -1,2 +1,4 @@
 pysam==0.20.0
-vcfpy==0.13.6
+python-dateutil==2.8.2
+six==1.16.0
+vobject==0.9.6.1
