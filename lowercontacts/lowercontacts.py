@@ -1,9 +1,9 @@
-import vcfpy
+import vobject
 import sys
 
-reader = vcfpy.Reader.from_path(sys.argv[1])
-writer = vcfpy.Writer.from_path('/dev/stdout', reader.header)
-
-print(reader)
-for contact in reader:
-    print(contact)
+with open(sys.argv[1]) as readfile:
+    writefile = open(sys.argv[2], "a")
+    for card in vobject.readComponents(readfile.read()):
+        card.n.value = vobject.vcard.Name(family=card.n.value.family.lower(), given=card.n.value.given.lower())
+        writefile.write(card.serialize())
+        print(f"lowercased {card.n.value}")
